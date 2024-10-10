@@ -4,7 +4,7 @@
   {:size size
    :x grid-x
    :y grid-y
-   :alive? (> (js/Math.random) 0.5)})
+   :alive?  (> (js/Math.random) 0.90)})
 
 (defn draw-cell [ctx [_ {:keys [alive? x y size]}]]
   (.beginPath ctx)
@@ -44,8 +44,7 @@
                                      (get-cell grid x (dec y) max-x max-y)
                                      (get-cell grid (dec x) y max-x max-y)
                                      (get-cell grid (inc x) y max-x max-y)]
-                                    (map #(get % :alive?))
-                                    (filter true?)
+                                    (keep #(get % :alive?))
                                     (doall)
                                     (count))]
       (assoc! cell :alive?
